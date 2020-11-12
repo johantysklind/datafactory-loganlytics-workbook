@@ -1,0 +1,385 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "parameters": [
+          {
+            "id": "d49554d4-694d-4606-89aa-510d92eb95cd",
+            "version": "KqlParameterItem/1.0",
+            "name": "TimeRange",
+            "type": 4,
+            "value": {
+              "durationMs": 2592000000
+            },
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 300000
+                },
+                {
+                  "durationMs": 900000
+                },
+                {
+                  "durationMs": 1800000
+                },
+                {
+                  "durationMs": 3600000
+                },
+                {
+                  "durationMs": 14400000
+                },
+                {
+                  "durationMs": 43200000
+                },
+                {
+                  "durationMs": 86400000
+                },
+                {
+                  "durationMs": 172800000
+                },
+                {
+                  "durationMs": 259200000
+                },
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 1209600000
+                },
+                {
+                  "durationMs": 2419200000
+                },
+                {
+                  "durationMs": 2592000000
+                },
+                {
+                  "durationMs": 5184000000
+                },
+                {
+                  "durationMs": 7776000000
+                }
+              ]
+            }
+          },
+          {
+            "id": "fd3f9b36-6e8f-4396-8478-1c9c46174057",
+            "version": "KqlParameterItem/1.0",
+            "name": "DataFactory",
+            "label": "Data Factory",
+            "type": 5,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "ADFPipelineRun\r\n| distinct ResourceId",
+            "value": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "resourceTypeFilter": {
+                "microsoft.datafactory/factories": true,
+                "microsoft.datafactory/datafactories": true
+              },
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "selectAllValue": ""
+            },
+            "timeContext": {
+              "durationMs": 0
+            },
+            "timeContextFromParameter": "TimeRange",
+            "queryType": 0,
+            "resourceType": "microsoft.operationalinsights/workspaces"
+          }
+        ],
+        "style": "pills",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "parameters - 2"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "ADFPipelineRun\r\n| where ResourceId in ({DataFactory}) \r\n|extend Resource = tostring(split(ResourceId, \"/\")[8])\r\n| summarize dcount(RunId) by Resource\r\n",
+        "size": 1,
+        "timeContext": {
+          "durationMs": 2592000000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "visualization": "piechart",
+        "chartSettings": {
+          "ySettings": {}
+        }
+      },
+      "customWidth": "50",
+      "name": "query - 2"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "let T= ADFPipelineRun\r\n| where ResourceId in ({DataFactory})  \r\n|summarize arg_max(TimeGenerated,* ) by RunId;\r\n\r\nT\r\n| summarize  Succeeded=dcountif(RunId, Status startswith \"Succeeded\"),Failed=dcountif(RunId, Status startswith \"Failed\"), Cancelled = dcountif(RunId, Status startswith \"Cancelled\") by PipelineName\r\n|render barchart with (series = PipelineName)",
+        "size": 1,
+        "timeContext": {
+          "durationMs": 2592000000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "Succeeded",
+              "formatter": 3,
+              "formatOptions": {
+                "palette": "green"
+              }
+            },
+            {
+              "columnMatch": "Failed",
+              "formatter": 3,
+              "formatOptions": {
+                "palette": "red"
+              }
+            },
+            {
+              "columnMatch": "Cancelled",
+              "formatter": 3,
+              "formatOptions": {
+                "palette": "orange"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal"
+                }
+              }
+            }
+          ]
+        },
+        "tileSettings": {
+          "showBorder": false,
+          "titleContent": {
+            "columnMatch": "PipelineName",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "dcount_RunId",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "PipelineName",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "dcount_RunId",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        },
+        "chartSettings": {
+          "xAxis": "PipelineName",
+          "seriesLabelSettings": [
+            {
+              "seriesName": "Succeeded",
+              "color": "green"
+            },
+            {
+              "seriesName": "Failed",
+              "color": "red"
+            },
+            {
+              "seriesName": "Cancelled",
+              "color": "orange"
+            },
+            {
+              "seriesName": "Total",
+              "color": "blue"
+            }
+          ],
+          "xSettings": {},
+          "ySettings": {}
+        }
+      },
+      "customWidth": "50",
+      "name": "query - 4"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "let T = ADFPipelineRun\r\n| where ResourceId in ({DataFactory}) \r\n| summarize arg_max(TimeGenerated,* ) by RunId\r\n| extend StatusIcon = case(Status == \"Succeeded\", '🟢', \r\n                       Status == \"InProgress\", '🟡', \r\n                       Status == \"Queued\", '🔵',\r\n                       Status == \"Cancelled\",'🟠', \r\n                       Status == \"Failed\", '🔴', \r\n                       '0')\r\n|order by TimeGenerated;\r\n\r\n\r\n\r\n\r\nlet T2 = T\r\n| summarize commands_details = make_list(pack('status', StatusIcon, 'TimeGenerated', TimeGenerated)) by PipelineName\r\n| mv-apply command_details = commands_details on\r\n(\r\n    order by todatetime(command_details['TimeGenerated']) asc\r\n    | summarize make_list(command_details['status'])\r\n)\r\n| project-away commands_details \r\n| extend ['Last runs'] = strcat_array(list_command_details_status,'');\r\n\r\n\r\n\r\n\r\nADFPipelineRun\r\n| where ResourceId in ({DataFactory}) \r\n| summarize arg_max(TimeGenerated,* ) by PipelineName\r\n| extend ParentId = '', Id = PipelineName,Link =  strcat(\"https://ms-adf.azure.com/monitoring/pipelineruns?factory=\", ResourceId), Resource = ResourceId, endd = iff(End == todatetime('1601-01-01T00:00:00Z'),now(),End)\r\n| extend Duration = format_timespan(endd- Start,'hh:mm:ss') ,Pipeline =  strcat('🗜️ ', PipelineName) \r\n| join  T2 on PipelineName\r\n|project ParentId, Id , Resource, Pipeline, Status, Start, Duration, ['Last runs'], Link,TimeGenerated\r\n\r\n|union (T\r\n| extend ParentId = PipelineName,Id = RunId,Link = strcat(\"https://ms-adf.azure.com/monitoring/pipelineruns/\",CorrelationId\r\n,\"?factory=\",ResourceId), endd = iff(End == todatetime('1601-01-01T00:00:00Z'),now(),End)\r\n|extend Duration = format_timespan(endd- Start,'hh:mm:ss')  \r\n|project ParentId,Id, Status,Start,Duration,Link,TimeGenerated)\r\n|union (ADFActivityRun \r\n| where ResourceId in ({DataFactory}) \r\n| summarize arg_max(TimeGenerated,* ) by ActivityRunId\r\n| extend endd = iff(End == todatetime('1601-01-01T00:00:00Z'),now(),End)\r\n| extend  ParentId = PipelineRunId,Id = ActivityRunId,Link=\"\",Duration = format_timespan(endd- Start,'hh:mm:ss')  , Resource = ActivityName\r\n| order by TimeGenerated desc \r\n| project ParentId,Id, Status,Start,Duration,Link,TimeGenerated, Resource)\r\n| union (ADFActivityRun \r\n| where ResourceId in ({DataFactory}) \r\n| summarize arg_max(TimeGenerated,* ) by ActivityRunId\r\n| where Status ==\"Failed\"\r\n| extend  ParentId = ActivityRunId, Id = \"*\", ['Last runs'] = ErrorMessage\r\n| project ParentId, Id, ['Last runs']);\r\n",
+        "size": 0,
+        "timeContext": {
+          "durationMs": 2592000000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "ParentId",
+              "formatter": 5,
+              "formatOptions": {}
+            },
+            {
+              "columnMatch": "Id",
+              "formatter": 5,
+              "formatOptions": {}
+            },
+            {
+              "columnMatch": "Resource",
+              "formatter": 13,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "Status",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Failed",
+                    "representation": "critical",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Succeeded",
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "InProgress",
+                    "representation": "pending"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Queued",
+                    "representation": "1",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Cancelled",
+                    "representation": "2",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "more",
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "Start",
+              "formatter": 6,
+              "formatOptions": {}
+            },
+            {
+              "columnMatch": "Link",
+              "formatter": 7,
+              "formatOptions": {
+                "linkTarget": "Url",
+                "linkLabel": "🌐 (url)"
+              }
+            },
+            {
+              "columnMatch": "TimeGenerated",
+              "formatter": 5,
+              "formatOptions": {}
+            }
+          ],
+          "hierarchySettings": {
+            "idColumn": "Id",
+            "parentColumn": "ParentId",
+            "treeType": 0,
+            "expanderColumn": "Pipeline"
+          },
+          "sortBy": [
+            {
+              "itemKey": "Last runs",
+              "sortOrder": 1
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "Last runs",
+            "sortOrder": 1
+          }
+        ]
+      },
+      "name": "query - 3"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "ADFPipelineRun\r\n| where ResourceId in ({DataFactory}) \r\n| where Status in ('Failed', 'Succeeded')\r\n| summarize arg_max(TimeGenerated,* ) by RunId\r\n| extend endd = iff(End == todatetime('1601-01-01T00:00:00Z'),now(),End)\r\n| extend Duration = datetime_diff('minute',endd, Start)\r\n| project PipelineName , Start, Duration ",
+        "size": 0,
+        "aggregation": 3,
+        "timeContext": {
+          "durationMs": 2592000000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "visualization": "timechart",
+        "chartSettings": {
+          "xSettings": {},
+          "ySettings": {
+            "numberFormatSettings": {
+              "unit": 25,
+              "options": {
+                "style": "decimal",
+                "useGrouping": true
+              }
+            }
+          }
+        }
+      },
+      "name": "query - 5"
+    }
+  ],
+  "fallbackResourceIds": [
+    "/subscriptions/e1644377-d092-4ecc-ab78-0c5f1bc0a416/resourceGroups/rg-logging/providers/Microsoft.OperationalInsights/workspaces/lgLogging"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
