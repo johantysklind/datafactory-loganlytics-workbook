@@ -113,9 +113,6 @@
             "quote": "'",
             "delimiter": ",",
             "query": "let synape = SynapseIntegrationPipelineRuns\r\n| extend ResourceId = _ResourceId;\r\n\r\nlet df = ADFPipelineRun;\r\n\r\nlet allPipelines =  df \r\n| union synape;\r\n\r\nallPipelines\r\n| where ResourceId in ({DataFactory})\r\n| project pipeId= strcat(ResourceId , PipelineName) , PipelineName\r\n//| distinct pipeId, PipelineName\r\n| distinct PipelineName",
-            "value": [
-              "value::all"
-            ],
             "typeSettings": {
               "additionalResourceOptions": [
                 "value::all"
@@ -128,7 +125,10 @@
             "timeContextFromParameter": "TimeRange",
             "defaultValue": "value::all",
             "queryType": 0,
-            "resourceType": "microsoft.operationalinsights/workspaces"
+            "resourceType": "microsoft.operationalinsights/workspaces",
+            "value": [
+              "value::all"
+            ]
           }
         ],
         "style": "pills",
@@ -179,7 +179,7 @@
               "size": 1,
               "title": "⚙ Runs per Synapse/Datafactory",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "exportFieldName": "ResourceId",
@@ -226,7 +226,7 @@
               "size": 1,
               "title": "🎯 Runs per pipeline grouped by status",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "queryType": 0,
@@ -340,7 +340,7 @@
               "aggregation": 3,
               "title": "⏲ Average duration per pipeline",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "queryType": 0,
@@ -389,7 +389,7 @@
               "size": 1,
               "title": "📑 Last runs",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "exportFieldName": "Pipeline",
@@ -514,7 +514,7 @@
               "showAnnotations": true,
               "title": "🗓 Number of runs by date",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "queryType": 0,
@@ -556,7 +556,7 @@
               "showAnnotations": true,
               "title": "🕓 Number of runs over time",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "queryType": 0,
@@ -615,7 +615,7 @@
               "aggregation": 3,
               "title": "⏱ Duration over time ",
               "timeContext": {
-                "durationMs": 0
+                "durationMs": 7776000000
               },
               "timeContextFromParameter": "TimeRange",
               "queryType": 0,
@@ -672,8 +672,9 @@
               "size": 1,
               "title": "💾 Rows copied over time",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "areachart"
@@ -692,8 +693,9 @@
               "size": 1,
               "title": "💻 Data read/written over time",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "areachart"
@@ -712,8 +714,9 @@
               "size": 1,
               "title": "📄  Files read / written over time",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "areachart"
@@ -732,8 +735,9 @@
               "size": 1,
               "title": "🛑 Errors over time",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "categoricalbar",
@@ -799,8 +803,9 @@
               "size": 1,
               "title": "🛑 Errors per Activity type",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "categoricalbar",
@@ -858,8 +863,9 @@
               "size": 1,
               "title": "🛑 Errors per failure type",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "categoricalbar",
@@ -917,8 +923,9 @@
               "size": 1,
               "title": "🛑 Errors per activity name",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "visualization": "categoricalbar",
@@ -976,8 +983,9 @@
               "size": 0,
               "title": "❗ Last failing activites",
               "timeContext": {
-                "durationMs": 86400000
+                "durationMs": 0
               },
+              "timeContextFromParameter": "TimeRange",
               "queryType": 0,
               "resourceType": "microsoft.operationalinsights/workspaces",
               "gridSettings": {
@@ -1003,7 +1011,7 @@
     }
   ],
   "fallbackResourceIds": [
-    "/subscriptions/e1644377-d092-4ecc-ab78-0c5f1bc0a416/resourceGroups/rg-synapse/providers/Microsoft.OperationalInsights/workspaces/la-synapse-001"
+   
   ],
   "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
 }
