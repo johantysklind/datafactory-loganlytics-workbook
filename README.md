@@ -24,5 +24,13 @@ The workbook supports answering questions:
 ## 1. Add dignostic settings from ADF / Synapse
 
 Goto diagnostic settings on your Data factory or Synapse instance and the add diagnostic settings.  
+![Goto to diagnostic settings](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/add-diagnosticsettings1.jpg?raw=true)
 
-Then add ActivityRuns, PipielineRuns and trigger runs ( all can be checked ) and send that to the appropriate Log Analytics workspace. Use Resource Specific destination table. 
+
+
+Then add ActivityRuns, PipielineRuns, trigger runs and All metrics ( all can be checked ) and send that to the appropriate Log Analytics workspace. Use Resource Specific destination table. 
+![Setup diagnostic settings](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/add-diagnosticsettings2.jpg?raw=true)
+
+
+
+
