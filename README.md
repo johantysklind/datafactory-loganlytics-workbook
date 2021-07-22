@@ -57,3 +57,20 @@ Show number of times a data facory or synapse insatnace has run pipelines. This 
 ![Runs per Pipeline](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/runs-per-pipeline.jpg?raw=true)
 
 Show number of times a pipeline has been triggered. This chart is to get a glimse of which pipeline is running the most. Also to see which is failing or succeding. 
+
+### Average duration per pipeline
+![Runs per Pipeline](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/average-duration.jpg?raw=true)
+
+Show average duration of pipelines. This to find long runing pipelines that might need attention.
+
+### Last runs
+Gives on overview of the last runs of the pipelines.
+![Last Run overview](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/last-runs1.jpg?raw=true)
+* Pipeline : Name of the pipeline
+* Resource : Name of the ADF / Synapse instance
+* Staus : Last run status 
+* Start : Last run start time
+* Duration : Last run duration
+* Last runs : Shows the last runs as a ball. One ball represents a run within the selected Timerange. The latest run is represented by the first ball.
+* Link : Link to monitor in ADF for the specific pipeline
+*  
