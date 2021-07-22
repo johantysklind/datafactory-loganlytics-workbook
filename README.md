@@ -41,7 +41,7 @@ Then add ActivityRuns, PipielineRuns, trigger runs and All metrics ( all can be 
 
 # Description of Charts
 ## Filters
-![Filters](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/filters?raw=true)
+![Filters](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/filters.jpg?raw=true)
 
 * Time Range : Is the time range of which the workbook will show data
 * Data factory: Filter on a specific ADF/Synapse or multipe
