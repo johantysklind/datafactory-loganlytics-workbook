@@ -31,6 +31,11 @@ Goto diagnostic settings on your Data factory or Synapse instance and the add di
 Then add ActivityRuns, PipielineRuns, trigger runs and All metrics ( all can be checked ) and send that to the appropriate Log Analytics workspace. Use Resource Specific destination table. 
 ![Setup diagnostic settings](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/add-diagnosticsettings2.jpg?raw=true)
 
-
+## 2. Add workbook to Log Analytics
+1. Goto **Workbooks** (under General)
+2. Press **New** button
+3. Press **Advance Editor ( </> )**
+4. Copy / paste the workbook(DataFactory.workbook) from here into window and press apply
+5. **Save** the workbook
 
 
