@@ -40,7 +40,20 @@ Then add ActivityRuns, PipielineRuns, trigger runs and All metrics ( all can be 
 
 
 # Description of Charts
+## Filters
+![Filters](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/filters?raw=true)
+
+* Time Range : Is the time range of which the workbook will show data
+* Data factory: Filter on a specific ADF/Synapse or multipe
+* Pipeline : Filter on a specifc pipeline. (IS cascading from Data factory filter)
+
 ## Overview Dashboard
 ### Runs per Synapse/Datafactory 
 ![Runs per ADF](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/runs-per-adf.jpg?raw=true)
+
 Show number of times a data facory or synapse insatnace has run pipelines. This chart is to get a glimse of which instance is running most pipelines. 
+
+### Runs per pieline grouped by status
+![Runs per Pipeline](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/runs-per-pipeline.jpg?raw=true)
+
+Show number of times a pipeline has been triggered. This chart is to get a glimse of which pipeline is running the most. Also to see which is failing or succeding. 
