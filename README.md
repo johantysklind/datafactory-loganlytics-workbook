@@ -73,4 +73,6 @@ Gives on overview of the last runs of the pipelines.
 * Duration : Last run duration
 * Last runs : Shows the last runs as a ball. One ball represents a run within the selected Timerange. The latest run is represented by the first ball.
 * Link : Link to monitor in ADF for the specific pipeline
-*  
+
+It is possible to drill down with in a pipeline to gain more information. Here is one step below that show all the runs that have happened in the specific time range. It show the state, duration starting time and a link to the monitor in adf for that specific pipieline run.
+![Last Run overview](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/last-runs2.jpg?raw=true)
