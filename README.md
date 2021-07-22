@@ -39,3 +39,8 @@ Then add ActivityRuns, PipielineRuns, trigger runs and All metrics ( all can be 
 5. **Save** the workbook
 
 
+# Description of Charts
+## Overview Dashboard
+### Runs per Synapse/Datafactory 
+![Runs per ADF](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/runs-per-adf.jpg?raw=true)
+Show number of times a data facory or synapse insatnace has run pipelines. This chart is to get a glimse of which instance is running most pipelines. 
