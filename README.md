@@ -80,5 +80,23 @@ It is possible to drill down with in a pipeline to gain more information. Here i
 It is also possible to see the activities that the pipeline has done. 
 ![Last Run overview](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/last-runs3.jpg?raw=true)
 
-### Nuber of runs per date and Number of runs over time
+### Number of runs per date and Number of runs over time
 ![Last Run overview](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/last-runs4.jpg?raw=true)
+Shows information regaring pipeline runs per day and per hour (regardless of day). 
+
+
+## Pipeline Details
+![Last Run overview](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/pipeline-details1.jpg?raw=true)
+* Duration over time : Shows duration of the pipeline over time selected
+* Copied rows: Shows number of rows copied in copy activity
+* Read data/written : Shows amount of data read and written by copy activites
+* Files read / written : Shows number of files read and written by copy activites
+
+
+![Last Run overview](https://github.com/johantysklind/datafactory-loganlytics-workbook/blob/master/.github/images/pipeline-details2.jpg?raw=true)
+
+* Error over time: Show wjhen errors occured
+* Errors per Activity type : Show number of errors per activity type
+* Errors per failure type : Show number of errors per failure type
+* Errors per activity name : Show number of errors per activity
+* Last failing activity : List of failed activites with error messages
